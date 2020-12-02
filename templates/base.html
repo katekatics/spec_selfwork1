@@ -1,0 +1,35 @@
+<!--templates/base.html-->
+{% load static %}
+<html>
+    <head>
+        <title>My app</title>
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="nav-left">
+                <h1>
+                    <a href="{% url 'home' %}">Home</a>
+                </h1>
+            </div>
+
+        </header>
+
+        {% if user.is_authenticated %}
+            <p>Current user {{user.username}}</p>
+            <p>
+                <a href="{% url 'logout' %}">Log Out</a>
+            </p>
+        {% else %}
+            <p>
+                You are not logged. <a href="{% url 'login' %}">+ Log In Now</a> or <a href = "{% url 'signup'%}"> + Sign Up Now</a>
+            </p>
+        {% endif %}
+
+
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>
